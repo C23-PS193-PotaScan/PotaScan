@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/baseline_camera_alt_24"
+        android:icon="@drawable/camera_selector_item_nav"
         tools:ignore="MenuTitle" />
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/baseline_newspaper_24"
+        android:id="@+id/navigation_articles"
+        android:icon="@drawable/news_selector_item_nav"
         tools:ignore="MenuTitle" />
 </menu>
