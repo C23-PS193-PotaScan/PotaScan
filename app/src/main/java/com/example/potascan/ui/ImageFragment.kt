@@ -7,29 +7,35 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.potascan.data.Result
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
-import com.example.potascan.R
-import com.example.potascan.createCustomTempFile
+import androidx.fragment.app.viewModels
 import com.example.potascan.databinding.FragmentImageBinding
 import com.example.potascan.rotateFile
 import com.example.potascan.uriToFile
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 class ImageFragment : Fragment() {
 
     private lateinit var binding: FragmentImageBinding
     private var getFile: File? = null
-    private lateinit var currentPhotoPath: String
+    private val viewModel by viewModels<ImageViewModel> {
+        ViewModelFactory.getInstance()
+    }
 
     companion object {
         const val CAMERA_X_RESULT = 200
@@ -83,7 +89,7 @@ class ImageFragment : Fragment() {
 
         binding.cameraButton.setOnClickListener { startCameraX() }
         binding.galleryButton.setOnClickListener { startGallery() }
-        binding.uploadButton.setOnClickListener { /* Handle upload button click */ }
+        binding.uploadButton.setOnClickListener { uploadImage() }
     }
 
     private val launcherIntentGallery = registerForActivityResult(
@@ -131,6 +137,69 @@ class ImageFragment : Fragment() {
                 getFile = file
                 binding.previewImageView.setImageBitmap(BitmapFactory.decodeFile(file.path))
             }
+        }
+    }
+
+    private fun uploadImage() {
+        if (getFile != null) {
+            val file = reduceFileImage(getFile as File)
+
+            val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+                "photo",
+                file.name,
+                requestImageFile
+            )
+
+            viewModel.postImage(imageMultipart).observe(this) { result ->
+                when (result) {
+                    is Result.Loading -> {
+                        // Handle loading state
+                    }
+                    is Result.Success -> {
+                        val data = result.data
+                        Toast.makeText(
+                            requireContext(),
+                            data?.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        val predict = data?.response
+                        when (predict) {
+                            "Late Blight" -> {
+                                val intent = Intent(requireContext(), LateBlightResultActivity::class.java)
+                                startActivity(intent)
+                            }
+                            "Early Blight" -> {
+                                val intent = Intent(requireContext(), EarlyBlightResultActivity::class.java)
+                                startActivity(intent)
+                            }
+                            "Healthy" -> {
+                                val intent = Intent(requireContext(), HealthyResultActivity::class.java)
+                                startActivity(intent)
+                            }
+                            else -> {
+                                val intent = Intent(requireContext(), ErrorActivity::class.java)
+                                startActivity(intent)
+                            }
+                        }
+                        Log.d("uploadImage", predict.toString())
+//                        val intent = Intent(requireContext(), MainActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+//                        startActivity(intent)
+                    }
+                    is Result.Error -> {
+                        Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                        val intent = Intent(requireContext(), ErrorActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(
+                requireContext(),
+                "Please select an image file first.",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 

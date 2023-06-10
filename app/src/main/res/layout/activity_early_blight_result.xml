@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.LateBlightResultActivity">
+        tools:context=".ui.EarlyBlightResultActivity">
 
         <ImageView
             android:id="@+id/img_result"
@@ -18,7 +18,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/late_blight" />
+            app:srcCompat="@drawable/early_blight" />
 
         <TextView
             android:id="@+id/name"
