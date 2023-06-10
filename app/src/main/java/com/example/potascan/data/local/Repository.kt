@@ -7,7 +7,6 @@ import androidx.lifecycle.map
 import com.example.potascan.api.ApiService
 import com.example.potascan.data.Result
 import com.example.potascan.data.remote.PostModelResponse
-import com.example.potascan.data.remote.UploadModelResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
