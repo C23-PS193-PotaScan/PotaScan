@@ -9,6 +9,6 @@ interface ApiService {
     @Multipart
     @POST("upload")
     suspend fun uploadPhoto(
-        @Part photo: MultipartBody.Part
+        @Part file: MultipartBody.Part
     ): PostModelResponse
 }

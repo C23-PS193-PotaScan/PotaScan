@@ -146,7 +146,7 @@ class ImageFragment : Fragment() {
 
             val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
             val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
-                "photo",
+                "file",
                 file.name,
                 requestImageFile
             )
@@ -182,7 +182,7 @@ class ImageFragment : Fragment() {
                                 startActivity(intent)
                             }
                         }
-                        Log.d("uploadImage", predict.toString())
+
 //                        val intent = Intent(requireContext(), MainActivity::class.java)
 //                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
 //                        startActivity(intent)
@@ -191,6 +191,7 @@ class ImageFragment : Fragment() {
                         Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
                         val intent = Intent(requireContext(), ErrorActivity::class.java)
                         startActivity(intent)
+                        Log.d("uploadImage", result.toString())
                     }
                 }
             }
