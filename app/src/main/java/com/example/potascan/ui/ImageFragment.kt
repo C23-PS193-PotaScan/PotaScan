@@ -57,7 +57,6 @@ class ImageFragment : Fragment() {
                     "Tidak mendapatkan permission.",
                     Toast.LENGTH_SHORT
                 ).show()
-                // Ganti `finish()` menjadi `requireActivity().finish()` jika Anda ingin menutup aktivitas utama jika permission tidak diberikan.
                 requireActivity().finish()
             }
         }
@@ -140,6 +139,15 @@ class ImageFragment : Fragment() {
         }
     }
 
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showLoading(false)
+    }
+
     private fun uploadImage() {
         if (getFile != null) {
             val file = reduceFileImage(getFile as File)
@@ -154,7 +162,7 @@ class ImageFragment : Fragment() {
             viewModel.postImage(imageMultipart).observe(this) { result ->
                 when (result) {
                     is Result.Loading -> {
-                        // Handle loading state
+                        showLoading(true)
                     }
                     is Result.Success -> {
                         val data = result.data
@@ -182,23 +190,24 @@ class ImageFragment : Fragment() {
                                 startActivity(intent)
                             }
                         }
-
-//                        val intent = Intent(requireContext(), MainActivity::class.java)
-//                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-//                        startActivity(intent)
                     }
                     is Result.Error -> {
                         Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
                         val intent = Intent(requireContext(), ErrorActivity::class.java)
                         startActivity(intent)
-                        Log.d("uploadImage", result.toString())
+                    }
+                    else -> {
+                        val intent = Intent(requireContext(), ErrorActivity::class.java)
+                        startActivity(intent)
                     }
                 }
             }
         } else {
+            val intent = Intent(requireContext(), ErrorActivity::class.java)
+            startActivity(intent)
             Toast.makeText(
                 requireContext(),
-                "Please select an image file first.",
+                "Anda belum mengunggah gambar",
                 Toast.LENGTH_SHORT
             ).show()
         }

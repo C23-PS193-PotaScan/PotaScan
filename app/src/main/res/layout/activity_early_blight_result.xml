@@ -24,7 +24,7 @@
             android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/result_sakit_title"
+            android:text="@string/early_blight_title"
             android:layout_marginStart="28dp"
             android:layout_marginEnd="28dp"
             android:layout_marginTop="24dp"
@@ -39,7 +39,7 @@
             android:id="@+id/disease_deskripsi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/result_sakit_deskripsi"
+            android:text="@string/early_blight_deskripsi"
             android:layout_marginStart="28dp"
             android:layout_marginEnd="28dp"
             android:layout_marginTop="8dp"
@@ -48,6 +48,11 @@
             app:layout_constraintHorizontal_bias="0.11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name" />
+
+        <FrameLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/fragment_container" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

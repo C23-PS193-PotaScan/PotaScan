@@ -4,22 +4,45 @@
     <string name="gallery">Galeri</string>
     <string name="upload">Upload</string>
     <string name="instruksi">Instruksi</string>
+
     <string name="title_card">Penurunan Produksi  Kentang Di Indonesia</string>
     <string name="btn_text">Umum</string>
+
     <string name="description_card">Factors to Consider Database selection
 in the first parth of our series, we laid the
 foundation for undaerstanding the vario..</string>
+
     <string name="teks_upload">Ambil Foto dengan memilih tombol di bawah</string>
-    <string name="result_sakit_title">Disease</string>
-    <string name="result_sakit_deskripsi">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce massa purus, fermentum sed dictum sed, porttitor eget libero. Nunc congue augue purus, id blandit purus aliquam ut. Vestibulum convallis eros id bibendum rutrum. Duis eget efficitur erat. Pellentesque sed elementum felis. Donec ut nulla at felis mattis ultrices eget sit amet mi. Integer id metus sit amet leo dapibus euismod eu vitae augue.</string>
+
+    <string name="early_blight_title">Early Blight</string>
+    <string name="early_blight_deskripsi">Early blight adalah penyakit pada tanaman kentang
+        yang disebabkan oleh jamur Alternaria solani.
+        Gejalanya termasuk bintik cokelat pada daun, batang, dan buah.
+        Penyakit early blight dapat menyebar melalui spora yang dihasilkan oleh jamur
+        dan dapat bertahan dalam sisa-sisa tanaman yang terinfeksi.
+        Faktor lingkungan seperti kelembaban dan suhu yang tinggi mempengaruhi perkembangan penyakit ini.
+        Early blight dapat diendalikan dengan pemilihan varietas tahan, rotasi tanaman, sanitasi,
+        dan penggunaan fungisida.</string>
+
+    <string name="late_blight_title">Late Blight</string>
+    <string name="late_blight_deskripsi">Late blight adalah penyakit pada tanaman kentang
+        yang disebabkan oleh jamur Phytophthora infestans. Gejalanya berupa
+        bintik keabu-abuan atau hitam pada daun, batang, dan buah.
+        Late blight sering terjadi pada iklim yang lembab dan suhu yang relatif sejuk.
+        Penyebarannya cepat melalui spora dan membutuhkan penggunaan fungisida
+        dan tindakan pencegahan seperti sanitasi dan pengawasan rutin</string>
+
     <string name="result_sehat_title">Sehat!</string>
     <string name="result_sehat_deskripsi">Kentang Anda dalam kondisi baik!</string>
+
     <string name="error_title">Terjadi Kesalahan!</string>
-    <string name="error_deskripsi">Anda sedang offline atau gambar yang diunggah tidak sesuai!</string>
+    <string name="error_deskripsi">Tidak ada gambar yang dipilih</string>
+
     <string name="title_instruction">Petunjuk</string>
     <string name="caption_instruction">Fokuskan pengambilan gambar
         pada bagian daun kentang
         seperti contoh berikut
         menggunakan kamera belakang.</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
