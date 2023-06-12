@@ -5,16 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import com.example.potascan.api.article.ApiServiceArticle
-import com.example.potascan.api.scan.ApiService
 import com.example.potascan.data.LoginResponse
 import com.example.potascan.data.Result
 import com.example.potascan.data.remote.RegisterResponse
-import com.example.potascan.data.remote.article.GetArticleResponse
-import com.example.potascan.data.remote.scan.PostModelResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import okhttp3.MultipartBody
 import retrofit2.HttpException
 
 class RepositoryArticle(
@@ -23,15 +19,7 @@ class RepositoryArticle(
 ) {
 
 
-    companion object {
-        @Volatile
-        private var instance: RepositoryArticle? = null
-        fun getInstance(
-            apiService: ApiServiceArticle, pref: UserPreference
-        ): RepositoryArticle = instance ?: synchronized(this) {
-            instance ?: RepositoryArticle(apiService, pref)
-        }.also { instance = it }
-    }
+
 
 
     fun register(
@@ -59,7 +47,7 @@ class RepositoryArticle(
         emit(Result.Loading)
         try {
             val result = api.login(email, password)
-            if (result.message == "Success") {
+            if (result.statusCode == 200) {
                 pref.setToken(result.data.accessToken)
                 pref.loginState(true)
                 val returnedResponse: LiveData<LoginResponse> = MutableLiveData(result)
@@ -75,5 +63,14 @@ class RepositoryArticle(
             val message = errorResponse.message
             emit(Result.Error(message))
         }
+    }
+    companion object {
+        @Volatile
+        private var instance: RepositoryArticle? = null
+        fun getInstance(
+            apiService: ApiServiceArticle, pref: UserPreference
+        ): RepositoryArticle = instance ?: synchronized(this) {
+            instance ?: RepositoryArticle(apiService, pref)
+        }.also { instance = it }
     }
 }
