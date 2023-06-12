@@ -1,31 +1,28 @@
-package com.example.potascan.ui
+package com.example.potascan.ui.ViewModel
 
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.potascan.data.Injection
 import com.example.potascan.data.local.Repository
-import com.example.potascan.ui.ViewModel.RegisterViewModel
-import okhttp3.MultipartBody
+import com.example.potascan.data.local.RepositoryArticle
+import com.example.potascan.ui.ImageViewModel
+import com.example.potascan.ui.LoginViewModel
+import com.example.potascan.ui.ViewModelFactory
 
-class ImageViewModel(private val repo: Repository): ViewModel()  {
-
-    private val _isLoading = MutableLiveData<Boolean>()
-    fun postImage(image: MultipartBody.Part) = repo.postPhoto(image)
-}
-
-class ViewModelFactory(private val repo: Repository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactoryArticle(private val repo: RepositoryArticle) : ViewModelProvider.NewInstanceFactory() {
     val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
-            modelClass.isAssignableFrom(ImageViewModel::class.java) -> {
-                ImageViewModel(repo) as T
+            modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
+                RegisterViewModel(repo) as T
+            }
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
+                LoginViewModel(repo) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
