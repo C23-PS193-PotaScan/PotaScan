@@ -27,7 +27,8 @@ class LoginActivity : AppCompatActivity() {
     private fun setupAction() {
         binding.btnLogin.setOnClickListener {
             val email = binding.evEmailLogin.text.toString()
-            val password = binding.evEmailLogin.text.toString()
+            val password = binding.evPassLogin.text.toString()
+            Log.d("isi email password: ", email+password)
             when {
                 email.isEmpty() -> {
                     binding.evEmailLogin.error = "Masukkan email"
