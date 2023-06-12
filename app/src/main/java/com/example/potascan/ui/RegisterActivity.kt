@@ -18,7 +18,7 @@ import com.example.potascan.ui.ViewModel.RegisterViewModel
 import com.example.potascan.data.Result
 import com.example.potascan.ui.ViewModel.ViewModelFactoryArticle
 
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
