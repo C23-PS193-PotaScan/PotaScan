@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.potascan.data.Injection
 import com.example.potascan.data.local.Repository
-import com.example.potascan.ui.ViewModel.RegisterViewModel
+
 import okhttp3.MultipartBody
 
 class ImageViewModel(private val repo: Repository): ViewModel()  {
