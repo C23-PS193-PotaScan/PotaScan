@@ -37,11 +37,12 @@ class RepositoryArticle(
     fun register(
         name: String,
         email: String,
-        password: String
+        password: String,
+        confirmPassword : String
     ): LiveData<Result<RegisterResponse>> = liveData {
         emit(Result.Loading)
         try {
-            val result = api.register(name, email, password)
+            val result = api.register(name, email, password,confirmPassword)
             val returnedResponse: LiveData<RegisterResponse> = MutableLiveData(result)
             withContext(Dispatchers.Main) {
                 emitSource(returnedResponse.map { Result.Success(it) })
@@ -58,7 +59,7 @@ class RepositoryArticle(
         emit(Result.Loading)
         try {
             val result = api.login(email, password)
-            if (result.message != "Wrong Password") {
+            if (result.message == "Success") {
                 pref.setToken(result.data.accessToken)
                 pref.loginState(true)
                 val returnedResponse: LiveData<LoginResponse> = MutableLiveData(result)

@@ -3,6 +3,14 @@
     <string name="camera">Kamera</string>
     <string name="gallery">Galeri</string>
     <string name="upload">Upload</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+
+    <string name="hint_name">Name</string>
+    <string name="hint_pass">Password</string>
+    <string name="hint_confirm_pass">Confirm Password</string>
+    <string name="hint_email">Email</string>
+
     <string name="instruksi">Instruksi</string>
 
     <string name="title_card">Penurunan Produksi  Kentang Di Indonesia</string>

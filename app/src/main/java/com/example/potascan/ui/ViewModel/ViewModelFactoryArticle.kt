@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.potascan.data.ArticleInjection
 import com.example.potascan.data.Injection
 import com.example.potascan.data.local.Repository
 import com.example.potascan.data.local.RepositoryArticle
@@ -30,13 +31,13 @@ class ViewModelFactoryArticle(private val repo: RepositoryArticle) : ViewModelPr
 
     companion   object {
         @Volatile
-        private var INSTANCE: ViewModelFactory? = null
+        private var INSTANCE: ViewModelFactoryArticle? = null
 
         @JvmStatic
-        fun getInstance(): ViewModelFactory {
+        fun getInstance(customPref: DataStore<Preferences>): ViewModelFactoryArticle {
             return INSTANCE ?: synchronized(this) {
-                val instance = ViewModelFactory(
-                    Injection.provideRepository()
+                val instance = ViewModelFactoryArticle(
+                    ArticleInjection.provideRepositoryArticle(customPref)
                 )
                 INSTANCE = instance
                 instance

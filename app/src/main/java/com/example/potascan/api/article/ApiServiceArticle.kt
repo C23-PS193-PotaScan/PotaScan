@@ -11,7 +11,8 @@ interface ApiServiceArticle {
     suspend fun register(
         @Field("name") name: String,
         @Field("email") email: String,
-        @Field("password") password: String
+        @Field("password") password: String,
+        @Field("confirmPass") confirmPass: String
     ): RegisterResponse
 
     @FormUrlEncoded

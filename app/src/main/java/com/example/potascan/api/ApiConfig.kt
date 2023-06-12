@@ -34,7 +34,7 @@ class ApiConfig {
                 .readTimeout(30, TimeUnit.SECONDS)    // Increase the read timeout
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://model-and-classification-api-fbaiidjkha-uc.a.run.app/")
+                .baseUrl("https://potascan-api-fbaiidjkha-uc.a.run.app/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
