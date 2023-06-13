@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.potascan.data.remote.article.DataItem
 import com.example.potascan.databinding.ItemListArticleBinding
 
-class ArticleAdapter(private val listStory: ArrayList<DataItem>) : RecyclerView.Adapter<ArticleAdapter.ListViewHolder>() {
+class ArticleAdapter(private val listArticle: ArrayList<DataItem>) : RecyclerView.Adapter<ArticleAdapter.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     interface OnItemClickCallback {
@@ -26,21 +26,21 @@ class ArticleAdapter(private val listStory: ArrayList<DataItem>) : RecyclerView.
         return ListViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = listStory.size
+    override fun getItemCount(): Int = listArticle.size
 
     override fun onBindViewHolder(viewHolder: ListViewHolder, position: Int) {
         Glide.with(viewHolder.itemView.context)
-            .load(listStory[position].imageUrlArticle)
+            .load(listArticle[position].imageUrlArticle)
             .into(viewHolder.binding.ivArticle)
 
-        viewHolder.binding.tvTitleCard.text = listStory[position].title
-        viewHolder.binding.tvDescriptionCard.text = listStory[position].mainContent
-        viewHolder.binding.category.text = listStory[position].category
+        viewHolder.binding.tvTitleCard.text = listArticle[position].title
+        viewHolder.binding.tvDescriptionCard.text = listArticle[position].mainContent
+        viewHolder.binding.category.text = listArticle[position].category
 //        viewHolder.binding.createdAt.text = listStory[position].createdAt
 //        viewHolder.binding.deskripsi.text = listStory[position].description
 
         viewHolder.itemView.setOnClickListener {
-            onItemClickCallback.onItemClicked(listStory[position])
+            onItemClickCallback.onItemClicked(listArticle[position])
         }
     }
 }

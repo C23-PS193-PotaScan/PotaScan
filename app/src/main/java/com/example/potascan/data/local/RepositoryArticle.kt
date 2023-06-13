@@ -1,11 +1,11 @@
 package com.example.potascan.data.local
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
-import com.example.potascan.api.ApiConfig
 import com.example.potascan.api.article.ApiServiceArticle
 import com.example.potascan.data.LoginResponse
 import com.example.potascan.data.Result
@@ -16,7 +16,6 @@ import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
-import retrofit2.Retrofit
 
 class RepositoryArticle(
     private val api: ApiServiceArticle,
@@ -76,11 +75,17 @@ class RepositoryArticle(
         }
     }
 
-    fun getAllArticle(title: String, image: String, mainContent: String, category: String): LiveData<Result<GetArticleResponse>> =
+ fun getAllArticle(token :String, title: String, image: String, mainContent: String, category: String): LiveData<Result<GetArticleResponse>> =
         liveData {
             emit(Result.Loading)
             try {
-                val result = api.getAllArticle("Bearer ${pref.getToken()}", title, image, mainContent, category)
+                val isiToken = "Bearer Token${pref.getToken()}"
+                token == isiToken
+                Log.d( "bearer token: ",token)
+//                tokenss = isiToken
+
+                val result = api.getAllArticle(token, title, image, mainContent, category)
+//                Log.d( "getAllArticle: ",result.toString())
                 val returnedResponse: LiveData<GetArticleResponse> = MutableLiveData(result)
                 withContext(Dispatchers.Main) {
                     emitSource(returnedResponse.map { Result.Success(it) })
