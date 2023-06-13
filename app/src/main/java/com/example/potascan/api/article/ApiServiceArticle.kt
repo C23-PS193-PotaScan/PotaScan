@@ -26,7 +26,10 @@ interface ApiServiceArticle {
     @GET("article")
     suspend fun getAllArticle(
         @Header("Authorization") token: String,
-
+        @Query("title") title: String,
+        @Query("image") image:String,
+        @Query("mainContent") mainContent: String,
+        @Query("category") category:String,
     ): GetArticleResponse
 
 }
