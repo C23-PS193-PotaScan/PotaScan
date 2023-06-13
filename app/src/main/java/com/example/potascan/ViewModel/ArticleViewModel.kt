@@ -11,13 +11,14 @@ import com.example.potascan.data.UserModel
 import com.example.potascan.data.remote.article.DataItem
 
 class ArticleViewModel (private val repo :RepositoryArticle):ViewModel() {
-    private val _listUser = MutableLiveData<List<DataItem>>()
-    val listUser: LiveData<List<DataItem>> = _listUser
+    private val _listArticle = MutableLiveData<List<DataItem>>()
+    val listArticle: LiveData<List<DataItem>> = _listArticle
+//    val listUser: LiveData<List<DataItem>> = _listUser
     fun getUser(): LiveData<UserModel> = repo.getUser()
 
     suspend fun logout() = repo.logout()
 
 
 
-    fun getAllStories(page: Int, size: Int, location: Int) = repo.getAllArticle(page, size, location)
+    fun getAllStories(title: String, image: String, mainContent: String, category: String) = repo.getAllArticle(title, image, mainContent, category)
 }

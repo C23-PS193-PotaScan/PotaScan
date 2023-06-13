@@ -30,8 +30,8 @@ class RepositoryArticle(
 
 
 
-    suspend fun getAllArticle(token:String)=
-        ApiConfig.getApiServiceArticle().getAllArticle(token)
+//    suspend fun getAllArticle(token:String)=
+//        ApiConfig.getApiServiceArticle().getAllArticle(token)
 
     fun register(
         name: String,
@@ -75,6 +75,24 @@ class RepositoryArticle(
             emit(Result.Error(message))
         }
     }
+
+    fun getAllArticle(title: String, image: String, mainContent: String, category: String): LiveData<Result<GetArticleResponse>> =
+        liveData {
+            emit(Result.Loading)
+            try {
+                val result = api.getAllArticle("Bearer ${pref.getToken()}", title, image, mainContent, category)
+                val returnedResponse: LiveData<GetArticleResponse> = MutableLiveData(result)
+                withContext(Dispatchers.Main) {
+                    emitSource(returnedResponse.map { Result.Success(it) })
+                }
+            } catch (e: HttpException) {
+                val jsonString = e.response()?.errorBody()?.string()
+                val errorResponse = Gson().fromJson(jsonString, GetArticleResponse::class.java)
+                val message = errorResponse.message
+                emit(Result.Error(message))
+            }
+        }
+
     fun getUser(): LiveData<UserModel> {
         return pref.getUser().asLiveData()
     }
