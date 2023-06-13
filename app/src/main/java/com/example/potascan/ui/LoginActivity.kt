@@ -7,9 +7,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import com.example.potascan.ViewModel.LoginViewModel
 import com.example.potascan.data.Result
 import com.example.potascan.databinding.ActivityLoginBinding
-import com.example.potascan.ui.ViewModel.ViewModelFactoryArticle
+import com.example.potascan.ViewModel.ViewModelFactoryArticle
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding

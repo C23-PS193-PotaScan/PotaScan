@@ -1,4 +1,4 @@
-package com.example.potascan.ui
+package com.example.potascan.ViewModel
 
 import androidx.lifecycle.ViewModel
 import com.example.potascan.data.local.RepositoryArticle
