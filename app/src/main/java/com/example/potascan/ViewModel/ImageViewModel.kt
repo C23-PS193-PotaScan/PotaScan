@@ -1,10 +1,5 @@
-package com.example.potascan.ui
+package com.example.potascan.ViewModel
 
-import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -20,7 +15,7 @@ class ImageViewModel(private val repo: Repository): ViewModel()  {
 }
 
 class ViewModelFactory(private val repo: Repository) : ViewModelProvider.NewInstanceFactory() {
-    val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {

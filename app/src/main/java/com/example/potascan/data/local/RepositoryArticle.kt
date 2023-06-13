@@ -2,25 +2,36 @@ package com.example.potascan.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
+import com.example.potascan.api.ApiConfig
 import com.example.potascan.api.article.ApiServiceArticle
 import com.example.potascan.data.LoginResponse
 import com.example.potascan.data.Result
+import com.example.potascan.data.UserModel
 import com.example.potascan.data.remote.RegisterResponse
+import com.example.potascan.data.remote.article.GetArticleResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
+import retrofit2.Retrofit
 
 class RepositoryArticle(
     private val api: ApiServiceArticle,
     private val pref: UserPreference
 ) {
 
+    suspend fun logout() {
+        pref.loginState(false)
+        pref.clearUser()
+    }
 
 
 
+    suspend fun getAllArticle(token:String)=
+        ApiConfig.getApiServiceArticle().getAllArticle(token)
 
     fun register(
         name: String,
@@ -47,7 +58,7 @@ class RepositoryArticle(
         emit(Result.Loading)
         try {
             val result = api.login(email, password)
-            if (result.statusCode == 200) {
+            if (result.message != "Wrong Password") {
                 pref.setToken(result.data.accessToken)
                 pref.loginState(true)
                 val returnedResponse: LiveData<LoginResponse> = MutableLiveData(result)
@@ -63,6 +74,9 @@ class RepositoryArticle(
             val message = errorResponse.message
             emit(Result.Error(message))
         }
+    }
+    fun getUser(): LiveData<UserModel> {
+        return pref.getUser().asLiveData()
     }
     companion object {
         @Volatile

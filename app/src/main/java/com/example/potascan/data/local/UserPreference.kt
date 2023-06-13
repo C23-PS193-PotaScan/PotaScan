@@ -40,6 +40,17 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
             }
         }
     }
+    fun getUser(): Flow<UserModel> {
+        return dataStore.data.map { preferences ->
+            UserModel(
+                preferences[NAME] ?:"",
+                preferences[EMAIL] ?:"",
+                preferences[PASSWORD] ?:"",
+                preferences[TOKEN] ?: "",
+                preferences[STATE] ?: false
+            )
+        }
+    }
     suspend fun setToken(token: String){
         dataStore.edit {
             it[TOKEN] = token

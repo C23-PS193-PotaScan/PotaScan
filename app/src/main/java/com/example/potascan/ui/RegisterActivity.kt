@@ -1,7 +1,6 @@
 package com.example.potascan.ui
 
 import android.content.ContentValues.TAG
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,14 +8,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
-import com.example.potascan.R
 import com.example.potascan.databinding.ActivityRegisterBinding
-import com.example.potascan.ui.ViewModel.RegisterViewModel
+import com.example.potascan.ViewModel.RegisterViewModel
 import com.example.potascan.data.Result
-import com.example.potascan.ui.ViewModel.ViewModelFactoryArticle
+import com.example.potascan.ViewModel.ViewModelFactoryArticle
 
 
 class RegisterActivity : AppCompatActivity() {

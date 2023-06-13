@@ -1,11 +1,10 @@
-package com.example.potascan.ui.ViewModel
+package com.example.potascan.ViewModel
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.potascan.data.ArticleInjection
 import com.example.potascan.data.local.RepositoryArticle
-import com.example.potascan.ui.LoginViewModel
 
 class ViewModelFactoryArticle(private val repo: RepositoryArticle) : ViewModelProvider.NewInstanceFactory() {
 
@@ -17,6 +16,9 @@ class ViewModelFactoryArticle(private val repo: RepositoryArticle) : ViewModelPr
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(repo) as T
+            }
+            modelClass.isAssignableFrom(ArticleViewModel::class.java) -> {
+                ArticleViewModel(repo) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
