@@ -22,7 +22,7 @@ import com.example.potascan.databinding.FragmentArticleBinding
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-class ArticleFragment: Fragment() {
+class ArticleFragment : Fragment() {
     private val articleViewModel by viewModels<ArticleViewModel> {
         ViewModelFactoryArticle.getInstance(requireContext().dataStore)
     }
@@ -35,8 +35,8 @@ class ArticleFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding= FragmentArticleBinding.inflate(inflater, container, false)
-        setStory(listArticles)
+        binding = FragmentArticleBinding.inflate(inflater, container, false)
+        setStory()
         binding.rvArticle.layoutManager = LinearLayoutManager(requireContext())
         binding.rvArticle.setHasFixedSize(true)
 
@@ -44,24 +44,16 @@ class ArticleFragment: Fragment() {
 
     }
 
-    private fun setStory(listArticle: List<DataItem>) {
+    private fun setStory() {
+        articleViewModel.getUser().observe(viewLifecycleOwner) {
+            if (it.token != null) {
 
+                articleViewModel.getAllStories(it.token).observe(viewLifecycleOwner) {
 
-        articleViewModel.getUser().observe(this){
-            if(it.token != null) {
+                    val adapter = ArticleAdapter(listArticles)
+                    binding.rvArticle.adapter = adapter
 
-           articleViewModel.getAllStories(
-                    it.token,
-                    "Tak Hanya Mudah Diolah, Intip 7 Manfaat Kentang untuk Tubuh",
-                    "https://storage.googleapis.com/ngetest6/foto%20artikel/1.jpg",
-                    "Kentang adalah salah satu sumber karbohidrat yang cukup digemari sebagai pengganti nasi. Jenis umbi-umbian ini mudah diolah menjadi menu pembuka, utama, maupun penutup yang tentu saja lezat.",
-                    "Healty"
-                )
-                articleViewModel.listArticle.observe(this) { listArticle ->
-                val adapter = ArticleAdapter(listArticle as ArrayList<DataItem>)
-                binding.rvArticle.adapter=adapter
-
-                adapter.setOnItemClickCallback(object : ArticleAdapter.OnItemClickCallback {
+                    adapter.setOnItemClickCallback(object : ArticleAdapter.OnItemClickCallback {
                         override fun onItemClicked(data: DataItem) {
 //                Log.d("TestStory", data.toString())
                             showSelectedStory(data)
@@ -69,8 +61,6 @@ class ArticleFragment: Fragment() {
                     })
                 }
             }
-
-
         }
 
 

@@ -27,11 +27,6 @@ class RepositoryArticle(
         pref.clearUser()
     }
 
-
-
-//    suspend fun getAllArticle(token:String)=
-//        ApiConfig.getApiServiceArticle().getAllArticle(token)
-
     fun register(
         name: String,
         email: String,
@@ -75,16 +70,15 @@ class RepositoryArticle(
         }
     }
 
- fun getAllArticle(token :String, title: String, image: String, mainContent: String, category: String): LiveData<Result<GetArticleResponse>> =
-        liveData {
+ fun getAllArticle(token :String): LiveData<Result<GetArticleResponse>> = liveData {
             emit(Result.Loading)
             try {
-                val isiToken = "Bearer Token${pref.getToken()}"
+                val isiToken = "Bearer ${pref.getToken()}"
                 token == isiToken
-                Log.d( "bearer token: ",token)
+                Log.d( "bearer token: ",isiToken)
 //                tokenss = isiToken
 
-                val result = api.getAllArticle(token, title, image, mainContent, category)
+                val result = api.getAllArticle(isiToken)
 //                Log.d( "getAllArticle: ",result.toString())
                 val returnedResponse: LiveData<GetArticleResponse> = MutableLiveData(result)
                 withContext(Dispatchers.Main) {

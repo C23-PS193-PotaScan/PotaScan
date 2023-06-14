@@ -21,5 +21,5 @@ class ArticleViewModel (private val repo :RepositoryArticle):ViewModel() {
 
 
 
-    fun getAllStories(token:String,title: String, image: String, mainContent: String, category: String) = repo.getAllArticle(token,title, image, mainContent, category)
+    fun getAllStories(token:String) = repo.getAllArticle(token)
 }
