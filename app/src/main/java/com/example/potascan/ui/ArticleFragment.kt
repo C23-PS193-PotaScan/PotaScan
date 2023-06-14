@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.fragment.app.Fragment
 import androidx.datastore.preferences.core.Preferences
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.potascan.ViewModel.ArticleViewModel
 import com.example.potascan.ViewModel.ViewModelFactoryArticle
 import com.example.potascan.adapter.ArticleAdapter
+import com.example.potascan.data.Result
 import com.example.potascan.data.remote.article.DataItem
 import com.example.potascan.databinding.FragmentArticleBinding
 
@@ -26,7 +28,7 @@ class ArticleFragment : Fragment() {
     private val articleViewModel by viewModels<ArticleViewModel> {
         ViewModelFactoryArticle.getInstance(requireContext().dataStore)
     }
-    private val listArticles: ArrayList<DataItem> = ArrayList()
+    private val listArticles: List<DataItem> = ArrayList()
 
     private lateinit var binding: FragmentArticleBinding
 
@@ -48,17 +50,26 @@ class ArticleFragment : Fragment() {
         articleViewModel.getUser().observe(viewLifecycleOwner) {
             if (it.token != null) {
 
-                articleViewModel.getAllStories(it.token).observe(viewLifecycleOwner) {
+                articleViewModel.getAllStories(it.token).observe(viewLifecycleOwner) {result->
+                    when(result){
+                        is Result.Success ->{
+                            val adapter = ArticleAdapter(result.data.listArticleData)
+                            binding.rvArticle.adapter = adapter
 
-                    val adapter = ArticleAdapter(listArticles)
-                    binding.rvArticle.adapter = adapter
-
-                    adapter.setOnItemClickCallback(object : ArticleAdapter.OnItemClickCallback {
-                        override fun onItemClicked(data: DataItem) {
-//                Log.d("TestStory", data.toString())
-                            showSelectedStory(data)
+                            adapter.setOnItemClickCallback(object : ArticleAdapter.OnItemClickCallback {
+                                override fun onItemClicked(data: DataItem) {
+                                    showSelectedStory(data)
+                                }
+                            })
                         }
-                    })
+                        is  Result.Error ->{
+
+                        }else->{
+                        Toast.makeText(requireContext(), "Data ditemukan", Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+
                 }
             }
         }

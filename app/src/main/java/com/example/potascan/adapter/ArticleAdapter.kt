@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.potascan.data.remote.article.DataItem
 import com.example.potascan.databinding.ItemListArticleBinding
 
-class ArticleAdapter(private val listArticle: ArrayList<DataItem>) : RecyclerView.Adapter<ArticleAdapter.ListViewHolder>() {
+class ArticleAdapter(private val listArticle: List<DataItem>) : RecyclerView.Adapter<ArticleAdapter.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     interface OnItemClickCallback {
