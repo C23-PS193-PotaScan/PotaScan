@@ -21,7 +21,7 @@ import androidx.fragment.app.viewModels
 import com.example.potascan.ViewModel.ImageViewModel
 import com.example.potascan.ViewModel.ViewModelFactory
 import com.example.potascan.databinding.FragmentImageBinding
-import com.example.potascan.rotateFile
+import com.example.potascan.reduceFileImage
 import com.example.potascan.uriToFile
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -131,7 +131,6 @@ class ImageFragment : Fragment() {
             val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
 
             myFile?.let { file ->
-                rotateFile(file, isBackCamera)
                 getFile = file
                 binding.previewImageView.setImageBitmap(BitmapFactory.decodeFile(file.path))
             }
@@ -210,9 +209,5 @@ class ImageFragment : Fragment() {
                 Toast.LENGTH_SHORT
             ).show()
         }
-    }
-
-    private fun reduceFileImage(file: File): File {
-        return file
     }
 }

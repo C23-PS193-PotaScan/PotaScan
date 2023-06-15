@@ -9,8 +9,6 @@ import com.example.potascan.data.local.Repository
 import okhttp3.MultipartBody
 
 class ImageViewModel(private val repo: Repository): ViewModel()  {
-
-    private val _isLoading = MutableLiveData<Boolean>()
     fun postImage(image: MultipartBody.Part) = repo.postPhoto(image)
 }
 
