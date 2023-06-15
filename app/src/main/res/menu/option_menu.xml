@@ -6,4 +6,9 @@
         android:title="@string/instruksi"
         android:icon="@drawable/baseline_info_24"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/logOut"
+        android:title="@string/logout"
+        android:icon="@drawable/ic_logout"
+        app:showAsAction="always" />
 </menu>

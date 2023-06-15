@@ -63,9 +63,9 @@ class ArticleFragment : Fragment() {
                             })
                         }
                         is  Result.Error ->{
-
+                            Log.d("Tes","Clear Error")
                         }else->{
-                        Toast.makeText(requireContext(), "Data ditemukan", Toast.LENGTH_SHORT).show()
+                        Log.d("Tes","Testing")
                     }
 
                 }
