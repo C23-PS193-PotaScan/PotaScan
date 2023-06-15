@@ -34,6 +34,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun setupAction() {
+        binding.textView5.setOnClickListener{
+            val intent =
+                Intent(this@RegisterActivity, LoginActivity::class.java)
+            startActivity(intent)
+        }
         binding.btnRegis.setOnClickListener {
             val name = binding.evName.text.toString()
             val email = binding.evEmail.text.toString()
@@ -61,19 +66,11 @@ class RegisterActivity : AppCompatActivity() {
                                     Toast.makeText(this@RegisterActivity, "Memproses registrasi", Toast.LENGTH_SHORT).show()
                                 }
                                 is Result.Success -> {
-                                    AlertDialog.Builder(this).apply {
-                                        setTitle("Yeah!")
-                                        setMessage("Akunnya sudah jadi nih. Yuk, login dan bagikan ceritamu!")
-                                        setPositiveButton("Lanjut") { _, _ ->
-                                            val intent =
-                                                Intent(this@RegisterActivity, LoginActivity::class.java)
-                                            intent.flags =
-                                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                            startActivity(intent)
-                                        }
-                                        create()
-                                        show()
-                                    }
+                                    val intent =
+                                        Intent(this@RegisterActivity, LoginActivity::class.java)
+                                    intent.flags =
+                                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    startActivity(intent)
                                 }
                                 is Result.Error -> {
                                     Toast.makeText(

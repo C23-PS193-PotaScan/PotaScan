@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -14,6 +16,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.potascan.R
 import com.example.potascan.ViewModel.MainViewModel
+import com.example.potascan.ViewModel.RegisterViewModel
+import com.example.potascan.ViewModel.ViewModelFactoryArticle
 import com.example.potascan.databinding.ActivityMainBinding
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -68,9 +72,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun showDialogChoose() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Androidly Alert")
-        builder.setMessage("We have a message")
-//builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+        builder.setTitle("Keluar dari aplikasi")
+        builder.setMessage("Apa anda yakin?")
 
         builder.setNegativeButton("Yes") { _, _ ->
             lifecycleScope.launch(Dispatchers.Main) {

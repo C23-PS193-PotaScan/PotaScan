@@ -18,7 +18,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/early_blight" />
+            app:srcCompat="@drawable/sick_potato" />
+
+        <TextView
+            android:id="@+id/sakit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toTopOf="@+id/name"
+            app:layout_constraintTop_toBottomOf="@+id/img_result"
+            android:text="@string/sakit"
+            android:layout_marginBottom="24dp"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textAlignment="center"/>
+
 
         <TextView
             android:id="@+id/name"
@@ -27,9 +40,9 @@
             android:text="@string/early_blight_title"
             android:layout_marginStart="28dp"
             android:layout_marginEnd="28dp"
-            android:layout_marginTop="24dp"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:layout_marginTop="110dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.11"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,11 +61,6 @@
             app:layout_constraintHorizontal_bias="0.11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name" />
-
-        <FrameLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:id="@+id/fragment_container" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

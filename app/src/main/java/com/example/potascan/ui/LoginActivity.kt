@@ -1,22 +1,15 @@
 package com.example.potascan.ui
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import com.example.potascan.ViewModel.LoginViewModel
 import com.example.potascan.data.Result
 import com.example.potascan.databinding.ActivityLoginBinding
 import com.example.potascan.ViewModel.ViewModelFactoryArticle
-
-//val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -32,6 +25,11 @@ class LoginActivity : AppCompatActivity() {
 
     }
     private fun setupAction() {
+        binding.textView5.setOnClickListener{
+            val intent =
+                Intent(this@LoginActivity, RegisterActivity::class.java)
+            startActivity(intent)
+        }
         binding.btnLogin.setOnClickListener {
             val email = binding.evEmailLogin.text.toString()
             val password = binding.evPassLogin.text.toString()
@@ -56,20 +54,11 @@ class LoginActivity : AppCompatActivity() {
                                     ).show()
                                 }
                                 is Result.Success -> {
-                                    AlertDialog.Builder(this).apply {
-                                        setTitle("Yeah!")
-                                        setMessage("Anda berhasil login!")
-                                        setPositiveButton("Lanjut") { _, _ ->
-                                            val intent =
-                                                Intent(this@LoginActivity, MainActivity::class.java)
-                                            intent.flags =
-                                                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                                            startActivity(intent)
-                                            finish()
-                                        }
-                                        create()
-                                        show()
-                                    }
+                                    val intent =
+                                        Intent(this@LoginActivity, MainActivity::class.java)
+                                    intent.flags =
+                                        Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                    startActivity(intent)
                                 }
                                 is Result.Error -> {
                                     Toast.makeText(
