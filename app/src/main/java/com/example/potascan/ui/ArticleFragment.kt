@@ -1,6 +1,5 @@
 package com.example.potascan.ui
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.fragment.app.Fragment
 import androidx.datastore.preferences.core.Preferences
@@ -21,6 +19,7 @@ import com.example.potascan.adapter.ArticleAdapter
 import com.example.potascan.data.Result
 import com.example.potascan.data.remote.article.DataItem
 import com.example.potascan.databinding.FragmentArticleBinding
+import okhttp3.internal.notifyAll
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -28,8 +27,6 @@ class ArticleFragment : Fragment() {
     private val articleViewModel by viewModels<ArticleViewModel> {
         ViewModelFactoryArticle.getInstance(requireContext().dataStore)
     }
-    private val listArticles: List<DataItem> = ArrayList()
-
     private lateinit var binding: FragmentArticleBinding
 
     override fun onCreateView(
@@ -50,39 +47,44 @@ class ArticleFragment : Fragment() {
         articleViewModel.getUser().observe(viewLifecycleOwner) {
             if (it.token != null) {
 
-                articleViewModel.getAllStories(it.token).observe(viewLifecycleOwner) {result->
-                    when(result){
-                        is Result.Success ->{
+                articleViewModel.getAllArticle(it.token).observe(viewLifecycleOwner) { result ->
+                    when (result) {
+                        is Result.Success -> {
                             val adapter = ArticleAdapter(result.data.listArticleData)
                             binding.rvArticle.adapter = adapter
 
-                            adapter.setOnItemClickCallback(object : ArticleAdapter.OnItemClickCallback {
+                            adapter.setOnItemClickCallback(object :
+                                ArticleAdapter.OnItemClickCallback {
                                 override fun onItemClicked(data: DataItem) {
+                                    Log.d("onItemClicked isi: ",data.toString())
                                     showSelectedStory(data)
                                 }
                             })
                         }
-                        is  Result.Error ->{
-                            Log.d("Tes","Clear Error")
-                        }else->{
-                        Log.d("Tes","Testing")
-                    }
 
-                }
+                        is Result.Error -> {
+                            Log.d("Tes", "Clear Error")
+                        }
+
+                        else -> {
+                            Log.d("Tes", "Testing")
+                        }
+
+                    }
 
                 }
             }
         }
-
-
     }
 
     private fun showSelectedStory(storyItem: DataItem) {
+        Log.d( "showSelectedStory isi: ", storyItem.toString())
         val detailIntent = Intent(requireContext(), DetailArticle::class.java)
         detailIntent.putExtra("title", storyItem.title)
-        detailIntent.putExtra("content", storyItem.mainContent)
+        detailIntent.putExtra("writer", storyItem.writer)
+        detailIntent.putExtra("description", storyItem.mainContent)
         detailIntent.putExtra("category", storyItem.category)
-        detailIntent.putExtra("image", storyItem.imageUrlArticle)
+        detailIntent.putExtra("urlImg", storyItem.imageUrlArticle)
         startActivity(detailIntent)
     }
 

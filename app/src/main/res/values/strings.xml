@@ -5,9 +5,6 @@
     <string name="upload">Upload</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
-    <string name="hypertext_login">Belum punya akun?</string>
-    <string name="hypertext_regist">Sudah punya akun?</string>
-    <string name="sakit">Waduh, kentang Anda sakit!</string>
 
     <string name="hint_name">Name</string>
     <string name="hint_pass">Password</string>
