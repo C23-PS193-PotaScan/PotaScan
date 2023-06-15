@@ -1,21 +1,20 @@
 package com.example.potascan.data.remote.article
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class GetArticleResponse(
 
+    @field:SerializedName("data")
+    val listArticleData: List<DataItem>,
     @field:SerializedName("statusCode")
     val statusCode: Int,
-
     @field:SerializedName("message")
-    val message: String,
-
-    @field:SerializedName("data")
-    val listArticleData: List<DataItem>
-
-
+    val message: String
 )
 
+@Parcelize
 data class DataItem(
 
     @field:SerializedName("articleId")
@@ -32,6 +31,4 @@ data class DataItem(
     val mainContent: String,
     @field:SerializedName("image")
     val imageUrlArticle: String
-
-
-)
+) : Parcelable

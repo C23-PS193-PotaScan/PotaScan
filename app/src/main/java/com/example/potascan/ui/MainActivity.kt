@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.potascan.R
 import com.example.potascan.ViewModel.MainViewModel
 import com.example.potascan.databinding.ActivityMainBinding
+
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
