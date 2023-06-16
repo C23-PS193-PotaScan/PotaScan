@@ -20,6 +20,9 @@ class ViewModelFactoryArticle(private val repo: RepositoryArticle) : ViewModelPr
             modelClass.isAssignableFrom(ArticleViewModel::class.java) -> {
                 ArticleViewModel(repo) as T
             }
+            modelClass.isAssignableFrom(MainViewModel::class.java) -> {
+                MainViewModel(repo) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }

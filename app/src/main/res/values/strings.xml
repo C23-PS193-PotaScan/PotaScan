@@ -6,12 +6,19 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
 
+    <string name="sakit">Waduh, kentang Anda sakit!</string>
+
     <string name="hint_name">Name</string>
     <string name="hint_pass">Password</string>
     <string name="hint_confirm_pass">Confirm Password</string>
     <string name="hint_email">Email</string>
+    <string name="hypertext_login">Belum punya akun?</string>
+    <string name="hypertext_regist">Sudah punya akun?</string>
 
     <string name="titleArticle">edited Tak Hanya Mudah Diolah, Intip 7 Manfaat Kentang untuk Tubuh</string>
+    <string name="dated_article">2023–05–24</string>
+    <string name="category_article">Healty</string>
+    <string name="writer_article">Andreas Wilson Setiawan</string>
 
     <string name="instruksi">Instruksi</string>
     <string name="logout">Log Out</string>
@@ -56,4 +63,5 @@ foundation for undaerstanding the vario..</string>
         menggunakan kamera belakang.</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="todo">TODO</string>
 </resources>

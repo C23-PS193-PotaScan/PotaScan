@@ -15,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.potascan.R
+import com.example.potascan.ViewModel.LoginViewModel
 import com.example.potascan.ViewModel.MainViewModel
 import com.example.potascan.ViewModel.RegisterViewModel
 import com.example.potascan.ViewModel.ViewModelFactoryArticle
@@ -28,7 +29,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var isFirstInstall = false
-    private lateinit var mainViewModel: MainViewModel
+    private val mainViewModel by viewModels<MainViewModel> {
+        ViewModelFactoryArticle.getInstance(dataStore)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

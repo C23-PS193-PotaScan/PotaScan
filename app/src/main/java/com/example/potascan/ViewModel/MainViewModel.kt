@@ -5,18 +5,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.potascan.data.UserModel
+import com.example.potascan.data.local.RepositoryArticle
 import com.example.potascan.data.local.UserPreference
 import com.example.potascan.data.remote.article.DataItem
 
-class MainViewModel(private val pref: UserPreference) : ViewModel() {
+class MainViewModel(private val repo: RepositoryArticle) : ViewModel() {
 
-    fun getUser(): LiveData<UserModel> {
-        return pref.getUser().asLiveData()
-    }
+    suspend fun logout() = repo.logout()
 
-    suspend fun logout() {
-        pref.loginState(false)
-        pref.clearUser()
-    }
+//    fun getUser(): LiveData<UserModel> {
+//        return pref.getUser().asLiveData()
+//    }
+//
+//    suspend fun logout() {
+//        pref.loginState(false)
+//        pref.clearUser()
+//    }
 
 }
