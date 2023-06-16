@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import com.example.potascan.databinding.ActivityRegisterBinding
 import com.example.potascan.ViewModel.RegisterViewModel
 import com.example.potascan.data.Result

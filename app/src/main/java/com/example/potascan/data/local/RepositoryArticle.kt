@@ -76,10 +76,8 @@ class RepositoryArticle(
                 val isiToken = "Bearer ${pref.getToken()}"
                 token == isiToken
                 Log.d( "bearer token: ",isiToken)
-//                tokenss = isiToken
 
                 val result = api.getAllArticle(isiToken)
-//                Log.d( "getAllArticle: ",result.toString())
                 val returnedResponse: LiveData<GetArticleResponse> = MutableLiveData(result)
                 withContext(Dispatchers.Main) {
                     emitSource(returnedResponse.map { Result.Success(it) })

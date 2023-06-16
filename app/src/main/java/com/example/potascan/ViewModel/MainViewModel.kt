@@ -13,13 +13,4 @@ class MainViewModel(private val repo: RepositoryArticle) : ViewModel() {
 
     suspend fun logout() = repo.logout()
 
-//    fun getUser(): LiveData<UserModel> {
-//        return pref.getUser().asLiveData()
-//    }
-//
-//    suspend fun logout() {
-//        pref.loginState(false)
-//        pref.clearUser()
-//    }
-
 }

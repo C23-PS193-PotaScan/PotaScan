@@ -19,7 +19,6 @@ import com.example.potascan.adapter.ArticleAdapter
 import com.example.potascan.data.Result
 import com.example.potascan.data.remote.article.DataItem
 import com.example.potascan.databinding.FragmentArticleBinding
-import okhttp3.internal.notifyAll
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 

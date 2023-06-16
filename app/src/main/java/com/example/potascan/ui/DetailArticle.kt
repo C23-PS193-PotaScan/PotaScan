@@ -1,11 +1,9 @@
 package com.example.potascan.ui
 
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.bumptech.glide.Glide
-import com.example.potascan.data.remote.article.DataItem
 import com.example.potascan.databinding.ActivityDetailArticleBinding
 
 
@@ -32,24 +30,5 @@ class DetailArticle : AppCompatActivity() {
         binding.descriptionDetailArticle.text = description
         binding.writerArticle.text = writer
         binding.categoryArticle.text = category
-
-//        val article = if (Build.VERSION.SDK_INT >= 33) {
-//            intent.getParcelableExtra<DataItem>(id, DataItem::class.java)
-//        } else {
-//            @Suppress("DEPRECATION")
-//            intent.getParcelableExtra<DataItem>(id)
-//        }
-//        Log.d("Story", article.toString())
-//
-//        if (article != null) {
-//            Glide.with(this@DetailArticle)
-//                .load(article.imageUrlArticle)
-//                .centerCrop()
-//                .into(binding.imgDetailArticle)
-//            binding.titleDetailArticle.text = article.title
-//            binding.descriptionDetailArticle.text = article.mainContent
-//            binding.writerArticle.text = article.writer
-//            binding.categoryArticle.text = article.category
-//        }
     }
 }
